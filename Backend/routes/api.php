@@ -16,3 +16,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::post("/follow", [userController::class, "follow"]);
 
 Route::post("/unfollow", [userController::class, "unfollow"]);
+
+// Route::post("/posts", [])
