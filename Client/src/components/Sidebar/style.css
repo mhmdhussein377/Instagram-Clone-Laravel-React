@@ -1,0 +1,52 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    border-right: 1px solid #ccc;
+    background-color: #000000;
+}
+
+.sidebar .logo {
+    margin-bottom: 30px;
+}
+
+.sidebar .logo img {
+    width: 120px;
+}
+
+.sidebar .links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar .links .link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    font-size: 1rem;
+}
+
+.sidebar .profile img {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.sidebar .more {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: auto;
+    color: white;
+    font-size: 1rem;
+}

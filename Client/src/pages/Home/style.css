@@ -1,0 +1,30 @@
+.home {
+    display: flex;
+}
+
+.sidebar {
+    flex: 1.6;
+    background-color: blue;
+    height: 100vh;
+}
+
+.right-home {
+    display: flex;
+    gap: 50px;
+    flex: 10;
+    background-color: red;
+}
+
+.right-home .feed {
+    flex: 7.7;
+}
+
+.right-home .feed .content {
+    max-width: 85%;
+    margin-left: auto;
+    background-color: aqua;
+}
+
+.right-home .friends {
+    flex: 4.7;
+}
