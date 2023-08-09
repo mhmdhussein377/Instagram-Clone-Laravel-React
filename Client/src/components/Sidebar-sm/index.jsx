@@ -6,18 +6,22 @@ import {BiMessageDots} from "react-icons/bi";
 import {CiMenuBurger} from "react-icons/ci";
 import "./style.css"
 import Search from "./../../components/Search"
+import {useState} from "react";
 
-const index = () => {
+const index = ({setIsSearchOpened, setIsModalOpened}) => {
+
     return (
         <div className="sidebar sidebar-sm">
-            <div className="logo">
-                <div className="icon"><BsInstagram color="white" size={30}/></div>
+            <div className="logo" onClick={() => setIsSearchOpened(false)}>
+                <div className="icon">
+                    <BsInstagram color="white" size={30}/>
+                </div>
             </div>
             <div className="links">
                 <div className="link">
                     <AiFillHome className="icon" size={25}/>
                 </div>
-                <div className="link">
+                <div className="link search-icon" onClick={() => setIsSearchOpened(false)}>
                     <BiSearch className="icon" size={25}/>
                 </div>
                 <div className="link">
@@ -32,7 +36,7 @@ const index = () => {
                 <div className="link">
                     <AiFillHeart className="icon" size={25}/>
                 </div>
-                <div className="link">
+                <div className="link" onClick={() => setIsModalOpened(true)}>
                     <BsPlusSquare className="icon" size={25}/>
                 </div>
                 <div className="link profile">
@@ -46,7 +50,7 @@ const index = () => {
             <div className="more">
                 <CiMenuBurger size={25} className="icon"/>
             </div>
-            <Search />
+            <Search/>
         </div>
     );
 };

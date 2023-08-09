@@ -4,17 +4,21 @@ import Feed from "./../../components/Feed"
 import Friends from "./../../components/Friends"
 import CreatePost from "./../../components/CreatePost"
 import SidebarSm from "./../../components/Sidebar-sm"
+import { useState } from "react"
 
 const index = () => {
+
+    let [isSearchOpened, setIsSearchOpened] = useState(false)
+    let [isModalOpened, setIsModalOpened] = useState(false)
+
     return (
         <div className="home">
-            {/* <Sidebar/> */}
-            <SidebarSm />
+            {isSearchOpened ? <SidebarSm setIsSearchOpened={setIsSearchOpened} setIsModalOpened={setIsModalOpened} /> : <Sidebar setIsSearchOpened={setIsSearchOpened} setIsModalOpened={setIsModalOpened} />}
             <div className="right-home">
                 <Feed/>
                 <Friends/>
             </div>
-            {/* <CreatePost /> */}
+            {isModalOpened && <CreatePost setIsModalOpened={setIsModalOpened} />}
         </div>
     );
 }

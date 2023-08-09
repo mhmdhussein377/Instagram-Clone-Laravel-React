@@ -3,10 +3,10 @@ import {MdOutlinePermMedia} from "react-icons/md"
 import {FaArrowLeftLong} from "react-icons/fa6"
 import {VscChromeClose} from "react-icons/vsc";
 
-const index = () => {
+const index = ({setIsModalOpened}) => {
     return (
         <div className="create-post">
-            <div className="close">
+            <div className="close" onClick={() => setIsModalOpened(false)}>
                 <VscChromeClose className="icon" color="white" size={30}/>
             </div>
             <div className="box empty">

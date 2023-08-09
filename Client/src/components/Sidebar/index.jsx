@@ -7,7 +7,7 @@ import {BsFillCameraReelsFill, BsPlusSquare} from "react-icons/bs";
 import {BiMessageDots} from "react-icons/bi"
 import {CiMenuBurger} from "react-icons/ci";
 
-const index = () => {
+const index = ({setIsSearchOpened, setIsModalOpened}) => {
     return (
         <div className="sidebar">
             <div className="logo">
@@ -18,7 +18,7 @@ const index = () => {
                     <AiFillHome className="icon" size={25}/>
                     Home
                 </div>
-                <div className="link">
+                <div className="link" onClick={() => setIsSearchOpened(true)}>
                     <BiSearch className="icon" size={25}/>
                     Search
                 </div>
@@ -38,7 +38,7 @@ const index = () => {
                     <AiFillHeart className="icon" size={25}/>
                     Notifications
                 </div>
-                <div className="link">
+                <div className="link" onClick={() => setIsModalOpened(true)}>
                     <BsPlusSquare className="icon" size={25}/>
                     Create
                 </div>

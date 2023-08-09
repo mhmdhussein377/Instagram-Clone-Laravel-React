@@ -17,7 +17,7 @@
 .sidebar .links {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
 }
 
 .sidebar .links .link {
@@ -26,6 +26,22 @@
     gap: 15px;
     color: white;
     font-size: 1rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+}
+
+.sidebar .links .link:hover {
+    background-color: #73737352;
 }
 
 .sidebar .profile img {
