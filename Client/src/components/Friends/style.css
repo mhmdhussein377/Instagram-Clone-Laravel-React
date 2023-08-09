@@ -1,0 +1,92 @@
+.friends {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.friends .my-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.friends .my-profile .profile-pic img {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.friends .my-profile .data {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.friends .my-profile .data .username {
+    color: white;
+    cursor: pointer;
+}
+
+.friends .my-profile .data .name {
+    color: #737373;
+    font-size: .9375rem;
+}
+
+.friends h5 {
+    color: #737373;
+    margin-top: 10px;
+}
+
+.friends .friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.friends .friends-list .profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.friends .friends-list .profile .profile-pic img {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.friends .friends-list .profile .data {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.friends .friends-list .profile .data .username {
+    color: white;
+    font-size: .875rem;
+    cursor: pointer;
+}
+
+.friends .friends-list .profile .data .name {
+    color: #737373;
+    font-size: .8125rem;
+}

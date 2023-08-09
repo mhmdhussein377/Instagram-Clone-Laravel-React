@@ -14,6 +14,7 @@ const index = () => {
                     <div className="name">Mohammad Hussein</div>
                 </div>
             </div>
+            <h5>Friends</h5>
             <div className="friends-list">
                 <div className="profile">
                     <div className="profile-pic">

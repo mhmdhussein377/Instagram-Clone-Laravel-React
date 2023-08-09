@@ -12,7 +12,7 @@
     display: flex;
     gap: 50px;
     flex: 10;
-    background-color: red;
+    background-color: black;
 }
 
 .right-home .feed {
