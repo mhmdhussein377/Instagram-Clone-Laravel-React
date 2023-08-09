@@ -6,6 +6,7 @@ use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -14,18 +15,27 @@ class PostController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'image_url' => 'required|string',
+            'image' => 'required|string|max:2048',
         ]);
+
+        $base64Image = $request->image;
+        $decodedImage = base64_decode($base64Image);
+
+        $filename = 'post_' . time() . '.jpg';
+        $path = Storage::disk('public')->put('post_images/' . $filename, $decodedImage);
 
         $post = Post::create([
             'user_id' => $user->id,
-            'image_url' => $request->image_url,
+            'image_url' => 'post_images/' . $filename
         ]);
+
+        $imageUrl = Storage::url('post_images/' . $filename);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Post created successfully',
             'post' => $post,
+            'image_url' => $imageUrl
         ]);
     }
 

@@ -56,14 +56,14 @@ class UserController extends Controller
 
     public function searchUsers($searchItem) {
 
-        $auth_user = Auth::user();
+        $main_user = Auth::user();
 
         $users = User::where('username', 'LIKE', "%$searchItem%")
                     ->orWhere('name', 'LIKE', "%$searchItem%")->get();
 
-        // foreach($users as $user) {
-        //     $user->is_followed_by_me = $auth_user->isFollowedBy($user);
-        // }
+        foreach($users as $user) {
+            $user->is_followed_by_me = $main_user->isFollowing($user);
+        }
 
         return response()->json(['users' => $users]);
     }

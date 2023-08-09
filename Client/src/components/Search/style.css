@@ -72,7 +72,20 @@
 .content.filled .user {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
+}
+
+.content.filled .user .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content.filled .user .right {
+    color: blue;
+    cursor: pointer;
+    user-select: none;
 }
 
 .content.filled .user .profile-pic img {

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import "./style.css"
 import axios from "axios";
 
-const index = ({setFollowing, following}) => {
+const index = ({setFollowing, following, setSearchedUsers}) => {
 
     let [user,
         setUser] = useState({})
@@ -32,7 +32,13 @@ const index = ({setFollowing, following}) => {
     const handleUnfollow = async(friend) => {
         setFollowing((prev) => prev.filter((item) => item.id !== friend.id));
 
-        await axios.
+        const token = localStorage.getItem("token")
+        await axios.get(`http://127.0.0.1:8000/api/toggle-follow/${friend.id}`, {
+            "headers": {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        setSearchedUsers(prev => prev)
     }
 
     return (

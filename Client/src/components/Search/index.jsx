@@ -4,10 +4,8 @@ import "./style.css"
 import {AiOutlineSearch} from "react-icons/ai"
 import axios from "axios"
 
-const index = () => {
+const index = ({following, setFollowing, searchedUsers, setSearchedUsers}) => {
 
-    let [users,
-        setUsers] = useState([]);
     let [searchInput,
         setSearchInput] = useState("")
 
@@ -20,7 +18,7 @@ const index = () => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                setUsers(data.users)
+                setSearchedUsers(data.users)
             } catch (error) {
                 console.log(error)
             }
@@ -30,9 +28,28 @@ const index = () => {
         }
     }, [searchInput])
 
-    console.log(users)
+    const handleToggleFollow = async(e, user) => {
+        e.target.innerText === "Follow" ? e.target.innerText = "Unfollow" : e.target.innerText = "Follow"
 
-    console.log(users.length > 0)
+        try {
+            const token = localStorage.getItem("token")
+            await axios.get(`http://127.0.0.1:8000/api/toggle-follow/${user.id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            user.is_followed_by_me = !user.is_followed_by_me
+
+            if(following.some(item => item === user)) {
+                setFollowing(prev => prev.filter(item => item.id !== user.id))
+            } else {
+                setFollowing(prev => [user, ...prev])
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className="search">
@@ -47,20 +64,23 @@ const index = () => {
                     type="text"
                     placeholder="Search"/>
             </div>
-            {users.length > 0
+            {searchedUsers.length > 0
                 ? (
                     <div className="content filled">
-                        {users.map((user) => (
+                        {searchedUsers.map((user) => (
                             <div className="user">
-                                <div className="profile-pic">
-                                    <img
-                                        src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1691570136~exp=1691570736~hmac=576643e1b7fe42a13cba560394e3fec7ba404f7c5054f9cb6adbc5beaf86357f"
-                                        alt=""/>
+                                <div className="left">
+                                    <div className="profile-pic">
+                                        <img
+                                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1691570136~exp=1691570736~hmac=576643e1b7fe42a13cba560394e3fec7ba404f7c5054f9cb6adbc5beaf86357f"
+                                            alt=""/>
+                                    </div>
+                                    <div className="data">
+                                        <div className="username">{user.username}</div>
+                                        <div className="name">{user.name}</div>
+                                    </div>
                                 </div>
-                                <div className="data">
-                                    <div className="username">{user.username}</div>
-                                    <div className="name">{user.name}</div>
-                                </div>
+                                <div className="right" onClick={e => handleToggleFollow(e, user)}>{user.is_followed_by_me ? "Unfollow" : "Follow"}</div>
                             </div>
                         ))}
                     </div>
