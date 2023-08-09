@@ -21,5 +21,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     Route::get('/user/followers', [UserController::class, 'getFollowers']);
 
     Route::get('/user/following', [UserController::class, 'getFollowing']);
+
+    Route::get('/search-users/{searchItem}', [UserController::class, 'searchUsers']);
 });
 

@@ -46,4 +46,12 @@ class UserController extends Controller
         return response()->json(['following' => $following]);
     }
 
+    public function searchUsers($searchItem) {
+
+        $users = User::where('username', 'LIKE', "%$searchItem%")
+                    ->orWhere('name', 'LIKE', "%$searchItem%")->get();
+
+        return response()->json(['users' => $users]);
+    }
+
 }
