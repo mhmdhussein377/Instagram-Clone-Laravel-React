@@ -15,10 +15,11 @@
 
 .search .search-input {
     display: flex;
+    align-items: center;
     gap: 10px;
     margin-block: 2.5rem;
     padding: 8px 10px;
-    background-color: #737373;
+    background-color: #262626;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
