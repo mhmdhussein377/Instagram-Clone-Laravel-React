@@ -5,6 +5,7 @@ import {BsFillCameraReelsFill, BsPlusSquare, BsInstagram} from "react-icons/bs";
 import {BiMessageDots} from "react-icons/bi";
 import {CiMenuBurger} from "react-icons/ci";
 import "./style.css"
+import Search from "./../../components/Search"
 
 const index = () => {
     return (
@@ -45,6 +46,7 @@ const index = () => {
             <div className="more">
                 <CiMenuBurger size={25} className="icon"/>
             </div>
+            <Search />
         </div>
     );
 };

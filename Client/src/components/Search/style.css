@@ -1,0 +1,107 @@
+.search {
+    position: absolute;
+    top: 0;
+    left: 30%;
+    height: 100%;
+    width: 400px;
+    padding: 30px 20px;
+    background-color: black;
+}
+
+.search h3 {
+    font-size: 1.35rem;
+    color: white;
+}
+
+.search .search-input {
+    display: flex;
+    gap: 10px;
+    margin-block: 2.5rem;
+    padding: 8px 10px;
+    background-color: #737373;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.search .search-input input {
+    flex: 1;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+.search .search-input input::placeholder {
+    color: white;
+    font-size: 1rem;
+}
+
+.content.empty {
+    height: 100%;
+    display: none;
+}
+
+.content.empty .head {
+    font-size: 1.125rem;
+    color: white;
+}
+
+.content.empty .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.767);
+}
+
+.content.empty .bottom > * {
+    background-color: green;
+}
+
+.content.filled {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: white;
+}
+
+.content.filled .user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content.filled .user .profile-pic img {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.content.filled .user .data {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.content.filled .user .data .username {
+    font-size: .9375rem;
+    cursor: pointer;
+}
+
+.content.filled .user .data .name {
+    color: #737373;
+    font-size: .875rem;
+}
