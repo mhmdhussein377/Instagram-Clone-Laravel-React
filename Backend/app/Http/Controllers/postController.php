@@ -15,7 +15,7 @@ class PostController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'image' => 'required|string|max:2048',
+            'image' => 'required|string',
         ]);
 
         $base64Image = $request->image;

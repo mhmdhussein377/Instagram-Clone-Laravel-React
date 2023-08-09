@@ -6,6 +6,9 @@ import {IoPaperPlaneOutline} from "react-icons/io5"
 import {FiBookmark} from "react-icons/fi"
 
 const index = () => {
+
+    
+
     return (
         <div className="feed">
             <div className="content">

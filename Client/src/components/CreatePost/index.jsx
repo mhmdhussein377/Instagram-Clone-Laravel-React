@@ -3,15 +3,15 @@ import {MdOutlinePermMedia} from "react-icons/md"
 import {FaArrowLeftLong} from "react-icons/fa6"
 import {VscChromeClose} from "react-icons/vsc";
 import {useRef, useState} from "react";
+import axios from "axios";
 
 const index = ({setIsModalOpened}) => {
 
     let [input,
         setInput] = useState(null)
+    let [base64, setBase64] = useState("")
     const fileRef = useRef(null)
     const imageRef = useRef(null)
-
-    let base64 = "";
 
     const handleInput = (e) => {
         if (e.target.files.length > 0) {
@@ -30,11 +30,29 @@ const index = ({setIsModalOpened}) => {
 
             const reader = new FileReader();
             reader.onloadend = () => {
-                base64 = reader.result;
+                setBase64(reader.result);
             };
             reader.readAsDataURL(e.target.files[0]);
         }
     };
+
+    const handleCreatePost = async() => {
+
+        try {
+            const token = localStorage.getItem("token")
+            let { data } = await axios.post(`http://127.0.0.1:8000/api/create-post`, {image: base64}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    console.log(input)
+    console.log(base64)
 
     // handle image updating fileInput.addEventListener("input", );
 
@@ -53,7 +71,7 @@ const index = ({setIsModalOpened}) => {
                                 </div>
                             </div>
                             <div>
-                                <button>Create Post</button>
+                                <button onClick={handleCreatePost}>Create Post</button>
                             </div>
                         </div>
                         <div className="bottom">
