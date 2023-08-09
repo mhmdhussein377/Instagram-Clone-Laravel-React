@@ -44,4 +44,20 @@ class PostController extends Controller
         
         return response()->json(['posts' => $followingPosts]);
     }
+
+    public function toggleLike($postId) {
+
+        $user = Auth::user();
+        $post = Post::find($postId);
+        $likeExists = $post->likes()->where('user_id', $user->id)->exists();
+
+        if($likeExists) {
+            $post->likes()->where('user_id', $user->id)->delete();
+        } else {
+            $like = new Like(['user_id' => $user->id]);
+            $post->likes()->save($like);
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'post has been liked/disliked successfully']);
+    }
 }

@@ -10,13 +10,14 @@ const index = () => {
 
     let [isSearchOpened, setIsSearchOpened] = useState(false)
     let [isModalOpened, setIsModalOpened] = useState(false)
+    let [following, setFollowing] = useState([]);
 
     return (
         <div className="home">
             {isSearchOpened ? <SidebarSm setIsSearchOpened={setIsSearchOpened} setIsModalOpened={setIsModalOpened} /> : <Sidebar setIsSearchOpened={setIsSearchOpened} setIsModalOpened={setIsModalOpened} />}
             <div className="right-home">
                 <Feed/>
-                <Friends/>
+                <Friends following={following} setFollowing={setFollowing}/>
             </div>
             {isModalOpened && <CreatePost setIsModalOpened={setIsModalOpened} />}
         </div>

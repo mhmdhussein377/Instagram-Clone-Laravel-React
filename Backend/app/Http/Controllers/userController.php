@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    public function getUser() {
+
+        $user = Auth::user();
+
+        return response()->json(["user" => $user]);
+    }
+
     public function follow($userId) {
 
         $user = Auth::user();
@@ -48,8 +56,14 @@ class UserController extends Controller
 
     public function searchUsers($searchItem) {
 
+        $auth_user = Auth::user();
+
         $users = User::where('username', 'LIKE', "%$searchItem%")
                     ->orWhere('name', 'LIKE', "%$searchItem%")->get();
+
+        // foreach($users as $user) {
+        //     $user->is_followed_by_me = $auth_user->isFollowedBy($user);
+        // }
 
         return response()->json(['users' => $users]);
     }

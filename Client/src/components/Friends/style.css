@@ -54,6 +54,17 @@
 }
 
 .friends .friends-list .profile {
+    max-width: 80%;
+}
+
+.friends .friends-list .profile {
+    color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.friends .friends-list .profile .left {
     display: flex;
     align-items: center;
     gap: 10px;

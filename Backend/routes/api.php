@@ -15,6 +15,8 @@ Route::controller(AuthController::class)->group(function () {
 
 
 Route::group(['middleware' => ['jwt.auth']], function () {
+
+    Route::get("/user", [UserController::class, "getUser"]);
     
     Route::get("/toggle-follow/{userId}", [UserController::class, "follow"]);
 
@@ -28,5 +30,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     Route::post("/create-post", [PostController::class, 'createPost']);
 
     Route::get('/user/following/posts', [PostController::class, 'getFollowingPosts']);
+
+    Route::get("/posts/{postId}/toggle-like", [PostController::class, 'toggleLike']);
 });
 
