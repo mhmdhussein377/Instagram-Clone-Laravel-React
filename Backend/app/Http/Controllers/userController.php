@@ -30,5 +30,11 @@ class UserController extends Controller
         ]);
     }
 
-    
+    public function getFollowers() {
+        
+        $user = Auth::user();
+        $followers = $user->followers;
+
+        return response()->json(['followers' => $followers]);
+    }
 }

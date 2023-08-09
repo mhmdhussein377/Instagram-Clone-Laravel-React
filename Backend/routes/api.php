@@ -18,6 +18,6 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     
     Route::get("/toggle-follow/{userId}", [UserController::class, "follow"]);
 
-    
+    Route::get('/user/followers', [UserController::class, 'getFollowers']);
 });
 
