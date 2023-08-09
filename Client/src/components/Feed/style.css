@@ -1,3 +1,122 @@
 .feed  {
-    padding: 40px 0;
+    padding: 50px 0;
+}
+
+.feed .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.875rem;
+}
+
+.feed .stories {
+    display: flex;
+    gap: 15px;
+}
+
+.feed .stories .story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: .875rem;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.feed .stories .story .profile-pic img {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.feed .stories .story .name {
+    font-size: .8125rem;
+}
+
+.feed .content .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    margin: auto;
+}
+
+.feed .content .posts .post {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #737373;
+}
+
+.feed .content .posts .post .profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.feed .content .posts .post .profile .profile-pic, .feed .content .posts .post .profile .username {
+    cursor: pointer;
+}
+
+.feed .content .posts .post .profile .dots {
+    cursor: pointer;
+}
+
+.feed .post .profile .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feed .post .profile .left img {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.feed .post .post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: white;
+}
+
+.feed .post .post-content .post-pic img {
+    width: 100%;
+}
+
+.feed .post .reactions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.feed .post .reactions .icon {
+    cursor: pointer;
+}
+
+.feed .post .reactions .left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }

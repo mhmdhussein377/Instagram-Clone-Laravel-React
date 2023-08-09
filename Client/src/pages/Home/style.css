@@ -4,8 +4,10 @@
 
 .sidebar {
     flex: 1.6;
-    background-color: blue;
     height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 
 .right-home {
@@ -22,7 +24,6 @@
 .right-home .feed .content {
     max-width: 85%;
     margin-left: auto;
-    background-color: aqua;
 }
 
 .right-home .friends {
