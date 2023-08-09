@@ -28,4 +28,20 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+
+    public function getFollowingPosts() {
+
+        $user = Auth::user();
+        $followingPosts = [];
+
+        foreach ($user->following as $followedUser) {
+            $followingPosts = $followedUser->posts()->with('likes')->with('user')->latest()->get();
+
+            foreach($followingPosts as $post) {
+                $post->liked_by_me = $post->likes->contains('user_id', $user->id);
+            }
+        }
+        
+        return response()->json(['posts' => $followingPosts]);
+    }
 }
