@@ -10,6 +10,10 @@
     left: 0;
 }
 
+.sidebar-sm {
+    flex: 0.2;
+}
+
 .right-home {
     display: flex;
     gap: 50px;

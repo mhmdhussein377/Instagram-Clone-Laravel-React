@@ -1,0 +1,7 @@
+.sidebar .logo .icon {
+    margin-bottom: 30px;
+}
+
+.sidebar .icon {
+    cursor: pointer;
+}
