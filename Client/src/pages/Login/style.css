@@ -1,0 +1,223 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0 60px;
+}
+
+.login-top {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 350px;
+}
+
+.login .main-box {
+    padding: 20px 40px 20px 40px;
+    border: 1px solid #ccc;
+}
+
+.login .main-box .instagram-logo {
+    width: 170px;
+}
+
+.login .main-box p:first-of-type {
+    font-size: 1.125rem;
+    color: #737577;
+}
+
+.login .main-box .login-facebook {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    padding: 8px 0;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: .875rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.or {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: .75rem;
+    font-weight: bold;
+    color: #737577;
+    margin-block: 1.25rem;
+}
+
+.or .line {
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+}
+
+.login .facebook-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 30px;
+    color: #385185;
+    cursor: pointer;
+}
+
+.login .forgot-password {
+    margin-top: 20px;
+    font-size: .75rem;
+    cursor: pointer;
+}
+
+.login .main-box .inputs {
+    margin-block: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login .main-box .inputs input {
+    padding: 11px 10px;
+    width: 100%;
+    font-size: .75rem;
+    background-color: #fafafa;
+    border: none;
+    border: 1px solid #ccc;
+    color: #737373;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    outline: none;
+}
+
+.login .main-box .inputs input:focus {
+    border: 1px solid #737373;
+}
+
+.login .main-box form p:nth-of-type(1), .login .main-box form p:nth-of-type(2) {
+    font-size: .75rem;
+    line-height: 15px;
+    margin-right: 2px;
+    color: #737373;
+}
+
+.login .main-box form p:nth-of-type(1) a, .login .main-box form p:nth-of-type(2) a {
+    font-size: .75rem;
+    margin-left: .25rem;
+    margin-left: 3px;
+    margin-right: 3px;
+    color: #00376b;
+}
+
+.login .main-box form p:nth-of-type(2) {
+    margin-top: 30px;
+}
+
+.login .login-button {
+    width: 100%;
+    padding: 8px;
+    background-color: #0094f6bb;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.login .secondary-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    font-size: .875rem;
+}
+
+.login .secondary-box a {
+    color: #0095f6;
+    margin-left: 5px;
+}
+
+.login .apps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    font-size: .875rem;
+    font-weight: 500;
+}
+
+.login .apps .apps-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login .apps .apps-images img {
+    min-width: 130px;
+    max-width: 120px;
+}
+
+.login .login-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login .login-bottom .links ul {
+    display: flex;
+    gap: 15px;
+}
+
+.login .login-bottom .links ul a {
+    color: #737373;
+    font-size: .75rem;
+}
+
+.login .login-bottom .lang-copyrights {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: #737373;
+    font-size: .75rem;
+}
+
+.login .login-bottom .lang-copyrights .lang {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+
+
+
+
+
+
+
+img {
+    width: 100px;
+}

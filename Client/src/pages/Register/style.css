@@ -33,7 +33,7 @@
     color: white;
     border: none;
     padding: 8px 0;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 20px;
     font-size: .875rem;
     font-weight: 600;
@@ -84,6 +84,11 @@
     -moz-border-radius: 2px 5px 5px 2px;
     -ms-border-radius: 2px 5px 5px 2px;
     -o-border-radius: 2px 5px 5px 2px;
+    outline: none;
+}
+
+.register .main-box .inputs input:focus {
+    border: 1px solid #737373;
 }
 
 .register .main-box form p:nth-of-type(1), .register .main-box form p:nth-of-type(2) {
@@ -127,7 +132,7 @@
     justify-content: center;
     padding: 25px;
     border: 1px solid #ccc;
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: .875rem;
 }
 
