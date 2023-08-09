@@ -1,12 +1,30 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./style.css"
 import {AiFillFacebook} from "react-icons/ai"
 import {MdOutlineKeyboardArrowDown} from "react-icons/md";
 import Instagram from "./../../assets/Instagram.png"
 import GooglePlay from "./../../assets/google-play.png"
 import Microsoft from "./../../assets/microsoft.png"
+import { useState } from "react";
+import axios from "axios"
 
 const index = () => {
+
+    let [inputs, setInputs] = useState({})
+    const navigate = useNavigate()
+
+    const handleChange = (e) => {
+        setInputs({...inputs, [e.target.name] : e.target.value})
+    }
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+
+        let {data} = await axios.post("http://127.0.0.1:8000/api/register", inputs);
+        localStorage.setItem("token", data.authorisation.token)
+        navigate("/home")
+    }
+
     return (
         <div className="register">
             <div className="register-top">
@@ -24,19 +42,19 @@ const index = () => {
                         <span>OR</span>
                         <div className="line"></div>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="inputs">
                             <div>
-                                <input type="email" placeholder="Email"/>
+                                <input required onChange={handleChange} name="email" type="email" placeholder="Email"/>
                             </div>
                             <div>
-                                <input type="text" placeholder="Full Name"/>
+                                <input required onChange={handleChange} name="name" type="text" placeholder="Full Name"/>
                             </div>
                             <div>
-                                <input type="text" placeholder="Username"/>
+                                <input required onChange={handleChange} name="username" type="text" placeholder="Username"/>
                             </div>
                             <div>
-                                <input type="password" placeholder="Password"/>
+                                <input required onChange={handleChange} name="password" type="password" placeholder="Password"/>
                             </div>
                         </div>
                         <p>
@@ -52,7 +70,7 @@ const index = () => {
                             and
                             <a href="">Cookies Policy</a>.
                         </p>
-                        <button className="signup-button" type="Submit">Sign up</button>
+                        <button type="submit" className="signup-button">Sign up</button>
                     </form>
                 </div>
                 <div className="secondary-box">
