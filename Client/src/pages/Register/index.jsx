@@ -5,24 +5,32 @@ import {MdOutlineKeyboardArrowDown} from "react-icons/md";
 import Instagram from "./../../assets/Instagram.png"
 import GooglePlay from "./../../assets/google-play.png"
 import Microsoft from "./../../assets/microsoft.png"
-import { useState } from "react";
+import {useState} from "react";
 import axios from "axios"
 
 const index = () => {
 
-    let [inputs, setInputs] = useState({})
+    let [inputs,
+        setInputs] = useState({})
     const navigate = useNavigate()
 
     const handleChange = (e) => {
-        setInputs({...inputs, [e.target.name] : e.target.value})
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        })
     }
 
     const handleSubmit = async(e) => {
         e.preventDefault()
 
-        let {data} = await axios.post("http://127.0.0.1:8000/api/register", inputs);
-        localStorage.setItem("token", data.authorisation.token)
-        navigate("/home")
+        try {
+            let {data} = await axios.post("http://127.0.0.1:8000/api/register", inputs);
+            localStorage.setItem("token", data.authorisation.token);
+            navigate("/home");
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -45,16 +53,36 @@ const index = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="inputs">
                             <div>
-                                <input required onChange={handleChange} name="email" type="email" placeholder="Email"/>
+                                <input
+                                    required
+                                    onChange={handleChange}
+                                    name="email"
+                                    type="email"
+                                    placeholder="Email"/>
                             </div>
                             <div>
-                                <input required onChange={handleChange} name="name" type="text" placeholder="Full Name"/>
+                                <input
+                                    required
+                                    onChange={handleChange}
+                                    name="name"
+                                    type="text"
+                                    placeholder="Full Name"/>
                             </div>
                             <div>
-                                <input required onChange={handleChange} name="username" type="text" placeholder="Username"/>
+                                <input
+                                    required
+                                    onChange={handleChange}
+                                    name="username"
+                                    type="text"
+                                    placeholder="Username"/>
                             </div>
                             <div>
-                                <input required onChange={handleChange} name="password" type="password" placeholder="Password"/>
+                                <input
+                                    required
+                                    onChange={handleChange}
+                                    name="password"
+                                    type="password"
+                                    placeholder="Password"/>
                             </div>
                         </div>
                         <p>

@@ -1,12 +1,38 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./style.css";
 import {AiFillFacebook} from "react-icons/ai";
 import {MdOutlineKeyboardArrowDown} from "react-icons/md";
 import Instagram from "./../../assets/Instagram.png";
 import GooglePlay from "./../../assets/google-play.png";
 import Microsoft from "./../../assets/microsoft.png";
+import {useState} from "react";
+import axios from "axios"
 
 const index = () => {
+
+    let [inputs,
+        setInputs] = useState({})
+    const navigate = useNavigate()
+
+    const handleChange = (e) => {
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+
+        try {
+            let {data} = await axios.post("http://127.0.0.1:8000/api/login", inputs);
+            localStorage.setItem("token", data.authorisation.token);
+            navigate("/home");
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="login">
             <div className="login-top">
@@ -14,16 +40,26 @@ const index = () => {
                     <div>
                         <img className="instagram-logo" src={Instagram} alt="Instagram"/>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="inputs">
                             <div>
-                                <input type="email" placeholder="Username, or email"/>
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    name="email"
+                                    type="email"
+                                    placeholder="Username, or email"/>
                             </div>
                             <div>
-                                <input type="password" placeholder="Password"/>
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    name="password"
+                                    type="password"
+                                    placeholder="Password"/>
                             </div>
                         </div>
-                        <button className="login-button" type="Submit">
+                        <button className="login-button" type="submit">
                             Log in
                         </button>
                         <div className="or">
@@ -31,7 +67,8 @@ const index = () => {
                             <span>OR</span>
                             <div className="line"></div>
                         </div>
-                        <div className="facebook-login"><AiFillFacebook size={20} /> Log in with Facebook</div>
+                        <div className="facebook-login"><AiFillFacebook size={20}/>
+                            Log in with Facebook</div>
                     </form>
                     <div className="forgot-password">Forgot password?</div>
                 </div>
