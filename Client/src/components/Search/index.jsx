@@ -42,10 +42,8 @@ const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers})
 
             if (following.some((item) => item.id === user.id)) {
                 setFollowing((prev) => prev.filter((item) => item.id !== user.id));
-                console.log("heeeere")
             } else {
                 setFollowing((prev) => [...new Set([user, ...prev])]);
-                console.log("bottttom")
             }
 
             const token = localStorage.getItem("token")

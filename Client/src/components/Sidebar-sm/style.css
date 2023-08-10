@@ -1,3 +1,7 @@
+.sidebar.sidebar-sm .links {
+    width: fit-content;
+}
+
 .sidebar.sidebar-sm .logo {
     display: flex;
     align-items: center;
@@ -31,4 +35,12 @@
 
 .sidebar.sidebar-sm .links .link.search-icon {
     border: 1px solid white;
+}
+
+.sidebar.sidebar-sm .bottom {
+    width: fit-content;
+}
+
+.sidebar.sidebar-sm .bottom > * {
+    padding: 10px;
 }

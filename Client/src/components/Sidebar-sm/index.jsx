@@ -1,14 +1,41 @@
 import {AiFillHome, AiFillHeart} from "react-icons/ai";
-import {BiSearch} from "react-icons/bi";
-import {MdExplore, MdOutlineExplore} from "react-icons/md";
+import {BiSearch, BiLogOut} from "react-icons/bi";
+import {MdExplore} from "react-icons/md";
 import {BsFillCameraReelsFill, BsPlusSquare, BsInstagram} from "react-icons/bs";
 import {BiMessageDots} from "react-icons/bi";
 import {CiMenuBurger} from "react-icons/ci";
-import "./style.css"
 import Search from "./../../components/Search"
-import {useState} from "react";
+import "./style.css"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const index = ({setIsSearchOpened, setIsModalOpened, following, setFollowing, searchedUsers, setSearchedUsers, user}) => {
+const index = ({
+    setIsSearchOpened,
+    setIsModalOpened,
+    following,
+    setFollowing,
+    searchedUsers,
+    setSearchedUsers,
+    user
+}) => {
+
+    const navigate = useNavigate()
+
+    const handleLogout = async() => {
+        try {
+            const token = localStorage.getItem("token");
+            console.log(token);
+            let response = await axios.post("http://127.0.0.1:8000/api/logout", null, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            localStorage.removeItem("token");
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div className="sidebar sidebar-sm">
@@ -47,10 +74,20 @@ const index = ({setIsSearchOpened, setIsModalOpened, following, setFollowing, se
                     </div>
                 </div>
             </div>
-            <div className="more">
-                <CiMenuBurger size={25} className="icon"/>
+            <div className="bottom">
+                <div className="logout">
+                    <BiLogOut size={25} onClick={handleLogout}/>
+                </div>
+                <div className="more">
+                    <CiMenuBurger size={25} className="icon"/>
+                </div>
             </div>
-            <Search user={user} searchedUsers={searchedUsers} setSearchedUsers={setSearchedUsers} following={following} setFollowing={setFollowing}/>
+            <Search
+                user={user}
+                searchedUsers={searchedUsers}
+                setSearchedUsers={setSearchedUsers}
+                following={following}
+                setFollowing={setFollowing}/>
         </div>
     );
 };

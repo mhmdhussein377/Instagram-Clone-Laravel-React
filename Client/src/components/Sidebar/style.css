@@ -14,13 +14,13 @@
     width: 120px;
 }
 
-.sidebar .links {
+.sidebar .links, .sidebar .bottom {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.sidebar .links .link {
+.sidebar .links .link, .sidebar .bottom > * {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -40,7 +40,7 @@
     -o-transition: all .2s ease;
 }
 
-.sidebar .links .link:hover {
+.sidebar .links .link:hover, .sidebar .bottom *:hover {
     background-color: #73737352;
 }
 
@@ -62,7 +62,6 @@
     margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
 .sidebar .more {

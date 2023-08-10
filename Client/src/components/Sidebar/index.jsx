@@ -1,5 +1,5 @@
 import "./style.css"
-import Instagram from "./../../assets/Instagram.png"
+import Instagram from "./../../assets/Instagram-white.png"
 import {AiFillHome, AiFillHeart} from "react-icons/ai";
 import {BiSearch} from "react-icons/bi"
 import {MdExplore, MdOutlineExplore} from "react-icons/md"
