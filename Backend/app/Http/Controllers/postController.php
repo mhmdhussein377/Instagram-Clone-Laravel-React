@@ -19,6 +19,7 @@ class PostController extends Controller
         ]);
 
         $base64Image = $request->image;
+        echo $base64Image;
         $decodedImage = base64_decode($base64Image);
 
         $filename = 'post_' . time() . '.jpg';

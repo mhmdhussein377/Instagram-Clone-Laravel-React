@@ -18,6 +18,11 @@ const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers})
                         Authorization: `Bearer ${token}`
                     }
                 });
+                console.log(data.users)
+                if (searchInput == "") {
+                    setSearchedUsers([])
+                    return
+                }
                 setSearchedUsers(data.users.filter(item => item.id !== user.id))
             } catch (error) {
                 console.log(error)
@@ -29,23 +34,30 @@ const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers})
     }, [searchInput, following])
 
     const handleToggleFollow = async(e, user) => {
-        e.target.innerText === "Follow" ? e.target.innerText = "Unfollow" : e.target.innerText = "Follow"
+        e.target.innerText === "Follow"
+            ? e.target.innerText = "Unfollow"
+            : e.target.innerText = "Follow"
 
         try {
+
+            if (following.some((item) => item === user)) {
+                setFollowing((prev) => prev.filter((item) => item.id !== user.id));
+                console.log("heeeere")
+            } else {
+                setFollowing((prev) => [...new Set([user, ...prev])]);
+                console.log("bottttom")
+            }
+            
+            user.is_followed_by_me = !user.is_followed_by_me
+
             const token = localStorage.getItem("token")
             await axios.get(`http://127.0.0.1:8000/api/toggle-follow/${user.id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });
+            })
 
-            user.is_followed_by_me = !user.is_followed_by_me
 
-            if(following.some(item => item === user)) {
-                setFollowing(prev => prev.filter(item => item.id !== user.id))
-            } else {
-                setFollowing(prev => [user, ...prev])
-            }
         } catch (error) {
             console.log(error)
         }
@@ -54,7 +66,7 @@ const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers})
     const handleSearch = (e) => {
         setSearchInput(e.target.value)
 
-        if(e.target.value === "") {
+        if (e.target.value == "") {
             setSearchedUsers([])
         }
     }
@@ -88,7 +100,9 @@ const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers})
                                         <div className="name">{user.name}</div>
                                     </div>
                                 </div>
-                                <div className="right" onClick={e => handleToggleFollow(e, user)}>{user.is_followed_by_me ? "Unfollow" : "Follow"}</div>
+                                <div className="right" onClick={e => handleToggleFollow(e, user)}>{user.is_followed_by_me
+                                        ? "Unfollow"
+                                        : "Follow"}</div>
                             </div>
                         ))}
                     </div>

@@ -14,6 +14,7 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
     const handleLogout = async() => {
         try {
             const token = localStorage.getItem("token");
+            console.log(token)
             await axios.post(`http://127.0.0.1:8000/api/logout`, {
                 headers: {
                     Authorization: `Bearer ${token}`

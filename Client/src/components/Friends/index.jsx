@@ -15,7 +15,6 @@ const index = ({user, setFollowing, following, setSearchedUsers}) => {
                 'Authorization': `Bearer ${token}`
             }
         });
-        setSearchedUsers(prev => prev)
     }
 
     return (

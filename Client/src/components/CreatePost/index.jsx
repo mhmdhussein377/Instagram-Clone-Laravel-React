@@ -40,11 +40,13 @@ const index = ({setIsModalOpened}) => {
 
         try {
             const token = localStorage.getItem("token")
-            let { data } = await axios.post(`http://127.0.0.1:8000/api/create-post`, {image: base64}, {
+            const newBase64 = base64.split(",")[1]
+            let { data } = await axios.post(`http://127.0.0.1:8000/api/create-post`, {image: newBase64}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            setIsModalOpened(false)
             console.log(data)
         } catch (error) {
             console.log(error)
