@@ -58,11 +58,29 @@
     -o-border-radius: 50%;
 }
 
+.sidebar .bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .sidebar .more {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-top: auto;
     color: white;
+    cursor: pointer;
     font-size: 1rem;
+}
+
+.sidebar .logout {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1rem;
+    color: white;
+    margin-top: auto;
+    cursor: pointer;
 }

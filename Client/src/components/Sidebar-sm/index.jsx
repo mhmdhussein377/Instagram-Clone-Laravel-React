@@ -8,7 +8,7 @@ import "./style.css"
 import Search from "./../../components/Search"
 import {useState} from "react";
 
-const index = ({setIsSearchOpened, setIsModalOpened, following, setFollowing, searchedUsers, setSearchedUsers}) => {
+const index = ({setIsSearchOpened, setIsModalOpened, following, setFollowing, searchedUsers, setSearchedUsers, user}) => {
 
     return (
         <div className="sidebar sidebar-sm">
@@ -50,7 +50,7 @@ const index = ({setIsSearchOpened, setIsModalOpened, following, setFollowing, se
             <div className="more">
                 <CiMenuBurger size={25} className="icon"/>
             </div>
-            <Search searchedUsers={searchedUsers} setSearchedUsers={setSearchedUsers} following={following} setFollowing={setFollowing}/>
+            <Search user={user} searchedUsers={searchedUsers} setSearchedUsers={setSearchedUsers} following={following} setFollowing={setFollowing}/>
         </div>
     );
 };

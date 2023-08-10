@@ -4,7 +4,7 @@ import "./style.css"
 import {AiOutlineSearch} from "react-icons/ai"
 import axios from "axios"
 
-const index = ({following, setFollowing, searchedUsers, setSearchedUsers}) => {
+const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers}) => {
 
     let [searchInput,
         setSearchInput] = useState("")
@@ -18,7 +18,7 @@ const index = ({following, setFollowing, searchedUsers, setSearchedUsers}) => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                setSearchedUsers(data.users)
+                setSearchedUsers(data.users.filter(item => item.id !== user.id))
             } catch (error) {
                 console.log(error)
             }
@@ -26,7 +26,7 @@ const index = ({following, setFollowing, searchedUsers, setSearchedUsers}) => {
         if (searchInput !== "") {
             getUsers()
         }
-    }, [searchInput])
+    }, [searchInput, following])
 
     const handleToggleFollow = async(e, user) => {
         e.target.innerText === "Follow" ? e.target.innerText = "Unfollow" : e.target.innerText = "Follow"
@@ -51,6 +51,14 @@ const index = ({following, setFollowing, searchedUsers, setSearchedUsers}) => {
         }
     }
 
+    const handleSearch = (e) => {
+        setSearchInput(e.target.value)
+
+        if(e.target.value === "") {
+            setSearchedUsers([])
+        }
+    }
+
     return (
         <div className="search">
             <h3>Search</h3>
@@ -60,7 +68,7 @@ const index = ({following, setFollowing, searchedUsers, setSearchedUsers}) => {
                 </div>
                 <input
                     value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
+                    onChange={handleSearch}
                     type="text"
                     placeholder="Search"/>
             </div>

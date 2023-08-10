@@ -9,7 +9,7 @@ import axios from "axios";
 import {AiFillHeart} from "react-icons/ai"
 import Post from "./../Post"
 
-const index = () => {
+const index = ({following}) => {
 
     let [posts,
         setPosts] = useState([])
@@ -25,7 +25,7 @@ const index = () => {
             setPosts(data.posts)
         }
         getPosts()
-    }, [])
+    }, [following])
 
     return (
         <div className="feed">
@@ -57,9 +57,9 @@ const index = () => {
                     </div>
                 </div>
                 <div className="posts">
-                    {posts.map((post, index) => (
+                    {posts.length > 0 ? posts.map((post, index) => (
                         <Post post={post} key={index} />
-                    ))}
+                    )) : <h1 className="no-posts">No Posts</h1>}
                 </div>
             </div>
         </div>

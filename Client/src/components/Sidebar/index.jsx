@@ -6,8 +6,24 @@ import {MdExplore, MdOutlineExplore} from "react-icons/md"
 import {BsFillCameraReelsFill, BsPlusSquare} from "react-icons/bs";
 import {BiMessageDots} from "react-icons/bi"
 import {CiMenuBurger} from "react-icons/ci";
+import {BiLogOut} from "react-icons/bi"
+import axios from "axios";
 
 const index = ({setIsSearchOpened, setIsModalOpened}) => {
+
+    const handleLogout = async() => {
+        try {
+            const token = localStorage.getItem("token");
+            await axios.post(`http://127.0.0.1:8000/api/logout`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="sidebar">
             <div className="logo">
@@ -51,9 +67,15 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
                     Profile
                 </div>
             </div>
-            <div className="more">
-                <CiMenuBurger size={25} className="icon"/>
-                More
+            <div className="bottom">
+                <div className="logout" onClick={handleLogout}>
+                    <BiLogOut size={25}/>
+                    Logout
+                </div>
+                <div className="more">
+                    <CiMenuBurger size={25} className="icon"/>
+                    More
+                </div>
             </div>
         </div>
     );

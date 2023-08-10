@@ -4,7 +4,8 @@ import Feed from "./../../components/Feed"
 import Friends from "./../../components/Friends"
 import CreatePost from "./../../components/CreatePost"
 import SidebarSm from "./../../components/Sidebar-sm"
-import {useState} from "react"
+import {useEffect, useState} from "react"
+import axios from "axios"
 
 const index = () => {
 
@@ -17,6 +18,31 @@ const index = () => {
     let [searchedUsers,
         setSearchedUsers] = useState([])
 
+    let [user,
+        setUser] = useState({});
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const getUser = async() => {
+            let {data} = await axios.get("http://127.0.0.1:8000/api/user", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setUser(data.user);
+        };
+        const getFollowing = async() => {
+            let {data} = await axios.get("http://127.0.0.1:8000/api/user/following", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setFollowing(data.following);
+        };
+        getUser();
+        getFollowing();
+    }, []);
+
     return (
         <div className="home">
             {isSearchOpened
@@ -26,13 +52,15 @@ const index = () => {
                         setFollowing={setFollowing}
                         following={following}
                         setIsSearchOpened={setIsSearchOpened}
-                        setIsModalOpened={setIsModalOpened}/>
+                        setIsModalOpened={setIsModalOpened}
+                        user={user}/>
                 : <Sidebar
                     setIsSearchOpened={setIsSearchOpened}
                     setIsModalOpened={setIsModalOpened}/>}
             <div className="right-home">
-                <Feed/>
+                <Feed following={following}/>
                 <Friends
+                    user={user}
                     setSearchedUsers={setSearchedUsers}
                     following={following}
                     setFollowing={setFollowing}/>
