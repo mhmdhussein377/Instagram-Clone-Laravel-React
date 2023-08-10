@@ -65,8 +65,7 @@ const index = ({post}) => {
                     </div>
                 </div>
                 <div className="likes-count">
-                    {likesCount}
-                    likes
+                    {likesCount} likes
                 </div>
             </div>
         </div>

@@ -47,8 +47,8 @@ const index = ({setIsModalOpened}) => {
                 }
             });
             setIsModalOpened(false)
-            console.log(data)
         } catch (error) {
+            setIsModalOpened(false);
             console.log(error)
         }
     }

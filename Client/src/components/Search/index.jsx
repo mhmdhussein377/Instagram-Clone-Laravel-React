@@ -40,15 +40,13 @@ const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers})
 
         try {
 
-            if (following.some((item) => item === user)) {
+            if (following.some((item) => item.id === user.id)) {
                 setFollowing((prev) => prev.filter((item) => item.id !== user.id));
                 console.log("heeeere")
             } else {
                 setFollowing((prev) => [...new Set([user, ...prev])]);
                 console.log("bottttom")
             }
-            
-            user.is_followed_by_me = !user.is_followed_by_me
 
             const token = localStorage.getItem("token")
             await axios.get(`http://127.0.0.1:8000/api/toggle-follow/${user.id}`, {

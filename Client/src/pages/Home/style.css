@@ -8,10 +8,14 @@
     position: sticky;
     top: 0;
     left: 0;
+    background-color: blue !important;
+    /* display: none; */
 }
 
-/* .sidebar-sm {
+/* 
+.sidebar-sm {
     flex: 0.2;
+    background-color: green;
 } */
 
 .right-home {
@@ -28,8 +32,22 @@
 .right-home .feed .content {
     max-width: 85%;
     margin-left: auto;
+    background-color: red;
 }
 
 .right-home .friends {
     flex: 4.7;
+}
+
+@media (max-width: 1160px) {
+    
+    .right-home .friends {
+        display: none;
+    }
+
+    .right-home .feed {
+        background-color: red;
+    }
+
+
 }
