@@ -8,18 +8,23 @@ import {BiMessageDots} from "react-icons/bi"
 import {CiMenuBurger} from "react-icons/ci";
 import {BiLogOut} from "react-icons/bi"
 import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 const index = ({setIsSearchOpened, setIsModalOpened}) => {
+
+    const navigate = useNavigate()
 
     const handleLogout = async() => {
         try {
             const token = localStorage.getItem("token");
             console.log(token)
-            await axios.post(`http://127.0.0.1:8000/api/logout`, {
+            let response = await axios.post("http://127.0.0.1:8000/api/logout", null, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
+            localStorage.removeItem("token")
+            navigate("/")
         } catch (error) {
             console.log(error)
         }

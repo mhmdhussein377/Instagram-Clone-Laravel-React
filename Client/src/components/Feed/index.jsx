@@ -22,6 +22,9 @@ const index = ({following}) => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            console.log("postsss")
+            console.log(data.posts)
+            console.log("postsss")
             setPosts(data.posts)
         }
         getPosts()

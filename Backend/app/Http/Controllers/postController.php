@@ -46,12 +46,18 @@ class PostController extends Controller
         $followingPosts = [];
 
         foreach ($user->following as $followedUser) {
-            $followingPosts = $followedUser->posts()->with('likes')->with('user')->latest()->get();
+            $posts = $followedUser->posts()->with('likes')->with('user')->latest()->get();
 
-            foreach($followingPosts as $post) {
+            foreach($posts as $post) {
                 $post->liked_by_me = $post->likes->contains('user_id', $user->id);
             }
+
+            $followingPosts = array_merge($followingPosts, $posts->toArray());
         }
+
+        usort($followingPosts, function ($a, $b) {
+            return strtotime($b['created_at']) - strtotime($a['created_at']);
+        });
         
         return response()->json(['posts' => $followingPosts]);
     }

@@ -9,8 +9,6 @@ import { useState } from "react";
 
 const index = ({post}) => {
 
-    console.log(post)
-
     let [isLiked, setIsLiked] = useState(post.liked_by_me)
     let [likesCount, setLikesCount] = useState(post.likes.length)
 
