@@ -16,13 +16,16 @@
 <a name="project-description"></a>
 <img src="./readme/title2.svg"/>
 
-> 
->
-> 
+> InstaClone is a social platform where users can share photos, connect with friends, and explore visual content. Whether you're sharing your moments, connecting with others, or discovering inspiring photos, InstaClone has it all. It's a simple and enjoyable way to share and view images.
 
 <a name="user-stories"></a>
 ### User Stories
-
+- As a user, I want to create an account and log in so that I can access the platform and interact with others.
+- As a user, I want to share photos so that I can share my moments and experiences.
+- As a user, I want to like photos so that I can express my appreciation for the content.
+- As a user, I want to follow and unfollow other users so that I can stay updated with their posts or manage my feed.
+- As a user, I want to see a feed of photos from users I follow so that I can view their latest updates.
+- As a user, I want to discover new users and their photos so that I can expand my network and explore diverse content.
 
 <br><br>
 
@@ -45,8 +48,9 @@
 <img src="./readme/title5.svg"/>
 
 ###  Instagram clone is built using the following technologies:
-
-
+React: The frontend is developed using React to create an engaging and user-friendly interface for sharing and viewing photos.
+Node.js with Express: The backend is powered by Node.js with the Express.js framework, handling user authentication, photo uploads, and interactions.
+MongoDB: MongoDB is used as the database system to store user profiles, photos, likes, and other relevant data for the platform.
 
 <br><br>
 
