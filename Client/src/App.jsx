@@ -7,12 +7,20 @@ import './App.css'
 
 function App() {
 
+  const routes = [
+    { path: "/", element: <Login /> },
+    { path: "/register", element: <Register /> },
+    { path: "/home", element: <Home /> }
+  ];
+
+  const generatedRoutes = routes.map((route, index) => (
+    <Route key={index} path={route.path} element={route.element} />
+  ));
+
   return (
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
+        {generatedRoutes}
       </Routes>
     </React.Fragment>
   );
