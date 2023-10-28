@@ -7,25 +7,25 @@ import GooglePlay from "./../../assets/google-play.png"
 import Microsoft from "./../../assets/microsoft.png"
 import {useState} from "react";
 import axios from "axios"
+import {RegisterInputFields, handleInputsChange, links} from "../../utils";
+import Input from "./../../components/UI/Input"
+import AppLogo from "../../components/UI/AppLogo"
 
 const index = () => {
 
-    let [inputs,
+    const [inputs,
         setInputs] = useState({})
     const navigate = useNavigate()
 
     const handleChange = (e) => {
-        setInputs({
-            ...inputs,
-            [e.target.name]: e.target.value
-        })
+        handleInputsChange(e, setInputs)
     }
 
     const handleSubmit = async(e) => {
         e.preventDefault()
 
         try {
-            let {data} = await axios.post("http://127.0.0.1:8000/api/register", inputs);
+            let {data} = await axios.post("/register", inputs);
             localStorage.setItem("token", data.authorisation.token);
             navigate("/home");
         } catch (error) {
@@ -33,13 +33,15 @@ const index = () => {
         }
     }
 
+    const renderedInputs = RegisterInputFields.map(({ name, placeholder, type }, index) => (
+        <Input key={index} name={name} placeholder={placeholder} onChange={(e) => handleChange(e, setInputs, inputs)} type={type} />
+    ));
+
     return (
         <div className="register">
             <div className="register-top">
                 <div className="main-box">
-                    <div>
-                        <img className="instagram-logo" src={Instagram} alt="Instagram"/>
-                    </div>
+                    <AppLogo className="instagram-logo" src={Instagram} alt="Instagram"/>
                     <p>Sign up to see photos and videos from your friends.</p>
                     <button className="login-facebook">
                         <AiFillFacebook size={20} color="white"/>
@@ -52,38 +54,7 @@ const index = () => {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="inputs">
-                            <div>
-                                <input
-                                    required
-                                    onChange={handleChange}
-                                    name="email"
-                                    type="email"
-                                    placeholder="Email"/>
-                            </div>
-                            <div>
-                                <input
-                                    required
-                                    onChange={handleChange}
-                                    name="name"
-                                    type="text"
-                                    placeholder="Full Name"/>
-                            </div>
-                            <div>
-                                <input
-                                    required
-                                    onChange={handleChange}
-                                    name="username"
-                                    type="text"
-                                    placeholder="Username"/>
-                            </div>
-                            <div>
-                                <input
-                                    required
-                                    onChange={handleChange}
-                                    name="password"
-                                    type="password"
-                                    placeholder="Password"/>
-                            </div>
+                            {renderedInputs}
                         </div>
                         <p>
                             People who use our service may have uploaded your contact information to
@@ -110,60 +81,19 @@ const index = () => {
                 <div className="apps">
                     <div>Get the app.</div>
                     <div className="apps-images">
-                        <div>
-                            <img className="google-play-logo" src={GooglePlay} alt="Google Play"/>
-                        </div>
-                        <div>
-                            <img className="microsoft-logo" src={Microsoft} alt="Microsoft"/>
-                        </div>
+                        <AppLogo className="google-play-logo" src={GooglePlay} alt="Google Play"/>
+                        <AppLogo className="microsoft-logo" src={Microsoft} alt="Microsoft"/>
                     </div>
                 </div>
             </div>
             <div className="register-bottom">
                 <div className="links">
                     <ul>
-                        <li>
-                            <a href="">Meta</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
-                        <li>
-                            <a href="">Blog</a>
-                        </li>
-                        <li>
-                            <a href="">Jobs</a>
-                        </li>
-                        <li>
-                            <a href="">Help</a>
-                        </li>
-                        <li>
-                            <a href="">API</a>
-                        </li>
-                        <li>
-                            <a href="">Privacy</a>
-                        </li>
-                        <li>
-                            <a href="">Terms</a>
-                        </li>
-                        <li>
-                            <a href="">Top Accounts</a>
-                        </li>
-                        <li>
-                            <a href="">Locations</a>
-                        </li>
-                        <li>
-                            <a href="">Instagram Lite</a>
-                        </li>
-                        <li>
-                            <a href="">Threads</a>
-                        </li>
-                        <li>
-                            <a href="">Contact Uploading & Non-Users</a>
-                        </li>
-                        <li>
-                            <a href="">Meta Verified</a>
-                        </li>
+                        {links.map((label, index) => (
+                            <li key={index}>
+                                <a href="#">{label}</a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <div className="lang-copyrights">
