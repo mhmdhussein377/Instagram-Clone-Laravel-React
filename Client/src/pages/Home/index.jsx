@@ -9,38 +9,32 @@ import axios from "axios"
 
 const index = () => {
 
-    let [isSearchOpened,
+    const [isSearchOpened,
         setIsSearchOpened] = useState(false)
-    let [isModalOpened,
+    const [isModalOpened,
         setIsModalOpened] = useState(false)
-    let [following,
+    const [following,
         setFollowing] = useState([]);
-    let [searchedUsers,
+    const [searchedUsers,
         setSearchedUsers] = useState([])
-
-    let [user,
+    const [user,
         setUser] = useState({});
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        const getUser = async() => {
-            let {data} = await axios.get("http://127.0.0.1:8000/api/user", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setUser(data.user);
-        };
-        const getFollowing = async() => {
-            let {data} = await axios.get("http://127.0.0.1:8000/api/user/following", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setFollowing(data.following);
-        };
-        getUser();
-        getFollowing();
+        const headers = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        Promise.all([
+            axios.get("/user", headers),
+            axios.get("/user/following", headers)
+        ]).then(([userResponse, followingResponse]) => {
+            setUser(userResponse.data.user);
+            setFollowing(followingResponse.data.following);
+        });
     }, []);
 
     return (
