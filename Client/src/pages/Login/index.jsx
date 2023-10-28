@@ -7,10 +7,11 @@ import GooglePlay from "./../../assets/google-play.png";
 import Microsoft from "./../../assets/microsoft.png";
 import {useState} from "react";
 import axios from "axios"
+import {links} from "./../../utils.js"
 
 const index = () => {
 
-    let [inputs,
+    const [inputs,
         setInputs] = useState({})
     const navigate = useNavigate()
 
@@ -25,7 +26,7 @@ const index = () => {
         e.preventDefault()
 
         try {
-            let {data} = await axios.post("http://127.0.0.1:8000/api/login", inputs);
+            let {data} = await axios.post("/login", inputs);
             localStorage.setItem("token", data.authorisation.token);
             navigate("/home");
         } catch (error) {
@@ -33,31 +34,32 @@ const index = () => {
         }
     }
 
+    const renderInput = (name, placeholder, onChange, type) => (
+        <div>
+            <input
+                onChange={onChange}
+                required
+                name={name}
+                type={type}
+                placeholder={placeholder}/>
+        </div>
+    );
+
+    const renderAppLogo = (className, src, alt) => (
+        <div>
+            <img className={className} src={src} alt={alt}/>
+        </div>
+    );
+
     return (
         <div className="login">
             <div className="login-top">
                 <div className="main-box">
-                    <div>
-                        <img className="instagram-logo" src={Instagram} alt="Instagram"/>
-                    </div>
+                    {renderAppLogo("instagram-log", Instagram, "Instagram")}
                     <form onSubmit={handleSubmit}>
                         <div className="inputs">
-                            <div>
-                                <input
-                                    onChange={handleChange}
-                                    required
-                                    name="email"
-                                    type="email"
-                                    placeholder="Username, or email"/>
-                            </div>
-                            <div>
-                                <input
-                                    onChange={handleChange}
-                                    required
-                                    name="password"
-                                    type="password"
-                                    placeholder="Password"/>
-                            </div>
+                            {renderInput('email', 'Username, or email', handleChange, 'email')}
+                            {renderInput('password', 'Password', handleChange, 'password')}
                         </div>
                         <button className="login-button" type="submit">
                             Log in
@@ -81,60 +83,19 @@ const index = () => {
                 <div className="apps">
                     <div>Get the app.</div>
                     <div className="apps-images">
-                        <div>
-                            <img className="google-play-logo" src={GooglePlay} alt="Google Play"/>
-                        </div>
-                        <div>
-                            <img className="microsoft-logo" src={Microsoft} alt="Microsoft"/>
-                        </div>
+                        {renderAppLogo('google-play-logo', GooglePlay, 'Google Play')}
+                        {renderAppLogo('microsoft-logo', Microsoft, 'Microsoft')}
                     </div>
                 </div>
             </div>
             <div className="login-bottom">
                 <div className="links">
                     <ul>
-                        <li>
-                            <a href="">Meta</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
-                        <li>
-                            <a href="">Blog</a>
-                        </li>
-                        <li>
-                            <a href="">Jobs</a>
-                        </li>
-                        <li>
-                            <a href="">Help</a>
-                        </li>
-                        <li>
-                            <a href="">API</a>
-                        </li>
-                        <li>
-                            <a href="">Privacy</a>
-                        </li>
-                        <li>
-                            <a href="">Terms</a>
-                        </li>
-                        <li>
-                            <a href="">Top Accounts</a>
-                        </li>
-                        <li>
-                            <a href="">Locations</a>
-                        </li>
-                        <li>
-                            <a href="">Instagram Lite</a>
-                        </li>
-                        <li>
-                            <a href="">Threads</a>
-                        </li>
-                        <li>
-                            <a href="">Contact Uploading & Non-Users</a>
-                        </li>
-                        <li>
-                            <a href="">Meta Verified</a>
-                        </li>
+                        {links.map((label, index) => (
+                            <li key={index}>
+                                <a href="#">{label}</a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <div className="lang-copyrights">

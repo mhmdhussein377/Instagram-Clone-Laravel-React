@@ -188,7 +188,10 @@
 
 .login .login-bottom .links ul {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 15px;
+    padding-inline: 20px;
 }
 
 .login .login-bottom .links ul a {
