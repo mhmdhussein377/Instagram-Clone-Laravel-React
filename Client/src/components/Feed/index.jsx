@@ -14,16 +14,25 @@ const index = ({following}) => {
 
     const [posts,
         setPosts] = useState([])
+    const [loading,
+        setLoading] = useState(false)
 
     useEffect(() => {
         const getPosts = async() => {
-            const token = localStorage.getItem("token")
-            let {data} = await axios.get("http://127.0.0.1:8000/api/user/following/posts", {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            setPosts(data.posts)
+            try {
+                setLoading(true)
+                const token = localStorage.getItem("token")
+                let {data} = await axios.get("http://127.0.0.1:8000/api/user/following/posts", {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setPosts(data.posts)
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setLoading(false)
+            }
         }
         getPosts()
     }, [following])
@@ -32,14 +41,12 @@ const index = ({following}) => {
         <div className="feed">
             <div className="content">
                 <div className="stories">
-                    {following.map((item, index) => (
-                        <Story {...item} key={index} />
-                    ))}
+                    {following.map((item, index) => (<Story {...item} key={index}/>))}
                 </div>
                 <div className="posts">
-                    {posts.length > 0 ? posts.map((post, index) => (
-                        <Post post={post} key={index} />
-                    )) : <h1 className="no-posts">No Posts</h1>}
+                    {loading ? <h1 className="loading">Loading...</h1> : posts.length > 0
+                        ? posts.map((post, index) => (<Post post={post} key={index}/>))
+                        : <h1 className="no-posts">No Posts</h1>}
                 </div>
             </div>
         </div>
