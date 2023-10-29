@@ -1,16 +1,13 @@
-import {useEffect, useState} from "react";
 import "./style.css"
 import axios from "axios";
 
-const index = ({user, setFollowing, following, setSearchedUsers}) => {
-
-    
+const index = ({user, setFollowing, following}) => {
 
     const handleUnfollow = async(friend) => {
         setFollowing((prev) => prev.filter((item) => item.id !== friend.id));
 
         const token = localStorage.getItem("token")
-        await axios.get(`http://127.0.0.1:8000/api/toggle-follow/${friend.id}`, {
+        await axios.get(`/toggle-follow/${friend.id}`, {
             "headers": {
                 'Authorization': `Bearer ${token}`
             }
