@@ -12,7 +12,7 @@ import "./style.css"
 
 const index = ({following}) => {
 
-    let [posts,
+    const [posts,
         setPosts] = useState([])
 
     useEffect(() => {
@@ -23,9 +23,6 @@ const index = ({following}) => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            console.log("postsss")
-            console.log(data.posts)
-            console.log("postsss")
             setPosts(data.posts)
         }
         getPosts()

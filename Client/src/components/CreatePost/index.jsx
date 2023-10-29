@@ -9,7 +9,8 @@ const index = ({setIsModalOpened}) => {
 
     let [input,
         setInput] = useState(null)
-    let [base64, setBase64] = useState("")
+    let [base64,
+        setBase64] = useState("")
     const fileRef = useRef(null)
     const imageRef = useRef(null)
 
@@ -41,7 +42,9 @@ const index = ({setIsModalOpened}) => {
         try {
             const token = localStorage.getItem("token")
             const newBase64 = base64.split(",")[1]
-            let { data } = await axios.post(`http://127.0.0.1:8000/api/create-post`, {image: newBase64}, {
+            await axios.post(`/create-post`, {
+                image: newBase64
+            }, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -53,14 +56,29 @@ const index = ({setIsModalOpened}) => {
         }
     }
 
-    console.log(input)
-    console.log(base64)
+    const closeModal = () => {
+        setIsModalOpened(false)
+    }
 
-    // handle image updating fileInput.addEventListener("input", );
+    const handleFileClick = () => {
+        fileRef
+            .current
+            .click()
+    }
+
+    const Button = (label, handleClick) => {
+        return (
+            <div>
+                <button onClick={handleClick}>
+                    {label}
+                </button>
+            </div>
+        )
+    }
 
     return (
         <div className="create-post">
-            <div className="close" onClick={() => setIsModalOpened(false)}>
+            <div className="close" onClick={closeModal}>
                 <VscChromeClose className="icon" color="white" size={30}/>
             </div>
             {input
@@ -72,15 +90,11 @@ const index = ({setIsModalOpened}) => {
                                     <FaArrowLeftLong onClick={() => setInput("")} size={20}/>
                                 </div>
                             </div>
-                            <div>
-                                <button onClick={handleCreatePost}>Create Post</button>
-                            </div>
+                            {Button("Create Post", handleCreatePost)}
                         </div>
                         <div className="bottom">
                             <div className="img-content">
-                                <img
-                                    ref={imageRef}
-                                    alt="post-img"/>
+                                <img ref={imageRef} alt="post-img"/>
                             </div>
                         </div>
                     </div>
@@ -94,17 +108,11 @@ const index = ({setIsModalOpened}) => {
                                     <MdOutlinePermMedia size={50}/>
                                 </div>
                                 <h3>Drag photos and videos here</h3>
-                                <div>
-                                    <button onClick={() => fileRef.current.click()}>
-                                        Select from computer
-                                    </button>
-                                </div>
+                                {Button("Select from computer", handleFileClick)}
                                 <input
                                     onChange={handleInput}
                                     ref={fileRef}
-                                    style={{
-                                    display: "none"
-                                }}
+                                    style={{display: "none"}}
                                     type="file"/>
                             </div>
                         </div>
