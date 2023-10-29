@@ -1,15 +1,9 @@
 import "./style.css"
 import Instagram from "./../../assets/Instagram-white.png"
-import {AiFillHome, AiFillHeart} from "react-icons/ai";
-import {BiSearch} from "react-icons/bi"
-import {MdExplore} from "react-icons/md"
-import {BsFillCameraReelsFill, BsPlusSquare} from "react-icons/bs";
-import {BiMessageDots} from "react-icons/bi"
-import {CiMenuBurger} from "react-icons/ci";
-import {BiLogOut} from "react-icons/bi"
 import axios from "axios";
 import {useNavigate} from "react-router-dom"
 import LinkWithIcon from "../Link/LinkWithIcon";
+import { getAdditionalLinks, getSidebarLinks } from "../../utils";
 
 const index = ({setIsSearchOpened, setIsModalOpened}) => {
 
@@ -18,7 +12,7 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
     const handleLogout = async() => {
         try {
             const token = localStorage.getItem("token");
-            await axios.post("http://127.0.0.1:8000/api/logout", null, {
+            await axios.post("/logout", null, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -30,32 +24,9 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
         }
     }
 
-    const links = [
-        {
-            icon: AiFillHome,
-            text: 'Home'
-        }, {
-            icon: BiSearch,
-            text: 'Search',
-            onClick: () => setIsSearchOpened(true)
-        }, {
-            icon: MdExplore,
-            text: 'Explore'
-        }, {
-            icon: BsFillCameraReelsFill,
-            text: 'Reels'
-        }, {
-            icon: BiMessageDots,
-            text: 'Messages'
-        }, {
-            icon: AiFillHeart,
-            text: 'Notifications'
-        }, {
-            icon: BsPlusSquare,
-            text: 'Create',
-            onClick: () => setIsModalOpened(true)
-        }
-    ];
+    const links = getSidebarLinks(setIsSearchOpened, setIsModalOpened);
+
+    const logoutAndMoreLinks = getAdditionalLinks(handleLogout);
 
     return (
         <div className="sidebar">
@@ -74,12 +45,7 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
                 </div>
             </div>
             <div className="bottom">
-                <LinkWithIcon
-                    icon={BiLogOut}
-                    text="Logout"
-                    onClick={handleLogout}
-                    className="logout"/>
-                <LinkWithIcon icon={CiMenuBurger} text="More" className="more"/>
+                {logoutAndMoreLinks.map((link, index) => <LinkWithIcon key={index} {...link}/>)}
             </div>
         </div>
     );

@@ -1,13 +1,10 @@
-import {AiFillHome, AiFillHeart} from "react-icons/ai";
-import {BiSearch, BiLogOut} from "react-icons/bi";
-import {MdExplore} from "react-icons/md";
-import {BsFillCameraReelsFill, BsPlusSquare, BsInstagram} from "react-icons/bs";
-import {BiMessageDots} from "react-icons/bi";
-import {CiMenuBurger} from "react-icons/ci";
+import {BsInstagram} from "react-icons/bs";
 import Search from "./../../components/Search"
 import "./style.css"
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import LinkWithIcon from "../Link/LinkWithIcon";
+import { getAdditionalLinks, getSidebarLinks } from "../../utils";
 
 const index = ({
     setIsSearchOpened,
@@ -24,8 +21,7 @@ const index = ({
     const handleLogout = async() => {
         try {
             const token = localStorage.getItem("token");
-            console.log(token);
-            let response = await axios.post("http://127.0.0.1:8000/api/logout", null, {
+            await axios.post("/logout", null, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -37,6 +33,10 @@ const index = ({
         }
     };
 
+    const links = getSidebarLinks(setIsSearchOpened, setIsModalOpened);
+
+    const logoutAndMoreLinks = getAdditionalLinks(handleLogout);
+
     return (
         <div className="sidebar sidebar-sm">
             <div className="logo" onClick={() => setIsSearchOpened(false)}>
@@ -45,27 +45,7 @@ const index = ({
                 </div>
             </div>
             <div className="links">
-                <div className="link">
-                    <AiFillHome className="icon" size={25}/>
-                </div>
-                <div className="link search-icon" onClick={() => setIsSearchOpened(false)}>
-                    <BiSearch className="icon" size={25}/>
-                </div>
-                <div className="link">
-                    <MdExplore className="icon" size={25}/>
-                </div>
-                <div className="link">
-                    <BsFillCameraReelsFill className="icon" size={25}/>
-                </div>
-                <div className="link">
-                    <BiMessageDots className="icon" size={25}/>
-                </div>
-                <div className="link">
-                    <AiFillHeart className="icon" size={25}/>
-                </div>
-                <div className="link" onClick={() => setIsModalOpened(true)}>
-                    <BsPlusSquare className="icon" size={25}/>
-                </div>
+                {links.map((link, index) => (<LinkWithIcon key={index} {...link}/>))}
                 <div className="link profile">
                     <div className="profile">
                         <img
@@ -75,12 +55,7 @@ const index = ({
                 </div>
             </div>
             <div className="bottom">
-                <div className="logout">
-                    <BiLogOut size={25} onClick={handleLogout}/>
-                </div>
-                <div className="more">
-                    <CiMenuBurger size={25} className="icon"/>
-                </div>
+                {logoutAndMoreLinks.map((link, index) => <LinkWithIcon key={index} {...link} />)}
             </div>
             <Search
                 user={user}
