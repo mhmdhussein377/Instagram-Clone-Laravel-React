@@ -2,13 +2,14 @@ import "./style.css"
 import Instagram from "./../../assets/Instagram-white.png"
 import {AiFillHome, AiFillHeart} from "react-icons/ai";
 import {BiSearch} from "react-icons/bi"
-import {MdExplore, MdOutlineExplore} from "react-icons/md"
+import {MdExplore} from "react-icons/md"
 import {BsFillCameraReelsFill, BsPlusSquare} from "react-icons/bs";
 import {BiMessageDots} from "react-icons/bi"
 import {CiMenuBurger} from "react-icons/ci";
 import {BiLogOut} from "react-icons/bi"
 import axios from "axios";
 import {useNavigate} from "react-router-dom"
+import LinkWithIcon from "../Link/LinkWithIcon";
 
 const index = ({setIsSearchOpened, setIsModalOpened}) => {
 
@@ -17,8 +18,7 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
     const handleLogout = async() => {
         try {
             const token = localStorage.getItem("token");
-            console.log(token)
-            let response = await axios.post("http://127.0.0.1:8000/api/logout", null, {
+            await axios.post("http://127.0.0.1:8000/api/logout", null, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -30,40 +30,40 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
         }
     }
 
+    const links = [
+        {
+            icon: AiFillHome,
+            text: 'Home'
+        }, {
+            icon: BiSearch,
+            text: 'Search',
+            onClick: () => setIsSearchOpened(true)
+        }, {
+            icon: MdExplore,
+            text: 'Explore'
+        }, {
+            icon: BsFillCameraReelsFill,
+            text: 'Reels'
+        }, {
+            icon: BiMessageDots,
+            text: 'Messages'
+        }, {
+            icon: AiFillHeart,
+            text: 'Notifications'
+        }, {
+            icon: BsPlusSquare,
+            text: 'Create',
+            onClick: () => setIsModalOpened(true)
+        }
+    ];
+
     return (
         <div className="sidebar">
             <div className="logo">
                 <img src={Instagram} alt=""/>
             </div>
             <div className="links">
-                <div className="link">
-                    <AiFillHome className="icon" size={25}/>
-                    Home
-                </div>
-                <div className="link" onClick={() => setIsSearchOpened(true)}>
-                    <BiSearch className="icon" size={25}/>
-                    Search
-                </div>
-                <div className="link">
-                    <MdExplore className="icon" size={25}/>
-                    Explore
-                </div>
-                <div className="link">
-                    <BsFillCameraReelsFill className="icon" size={25}/>
-                    Reels
-                </div>
-                <div className="link">
-                    <BiMessageDots className="icon" size={25}/>
-                    Messages
-                </div>
-                <div className="link">
-                    <AiFillHeart className="icon" size={25}/>
-                    Notifications
-                </div>
-                <div className="link" onClick={() => setIsModalOpened(true)}>
-                    <BsPlusSquare className="icon" size={25}/>
-                    Create
-                </div>
+                {links.map((link, index) => (<LinkWithIcon key={index} {...link}/>))}
                 <div className="link profile">
                     <div className="profile">
                         <img
@@ -74,14 +74,12 @@ const index = ({setIsSearchOpened, setIsModalOpened}) => {
                 </div>
             </div>
             <div className="bottom">
-                <div className="logout" onClick={handleLogout}>
-                    <BiLogOut size={25}/>
-                    Logout
-                </div>
-                <div className="more">
-                    <CiMenuBurger size={25} className="icon"/>
-                    More
-                </div>
+                <LinkWithIcon
+                    icon={BiLogOut}
+                    text="Logout"
+                    onClick={handleLogout}
+                    className="logout"/>
+                <LinkWithIcon icon={CiMenuBurger} text="More" className="more"/>
             </div>
         </div>
     );

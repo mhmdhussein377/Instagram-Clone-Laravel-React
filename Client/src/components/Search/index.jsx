@@ -6,54 +6,46 @@ import axios from "axios"
 
 const index = ({user, following, setFollowing, searchedUsers, setSearchedUsers}) => {
 
-    let [searchInput,
+    const [searchInput,
         setSearchInput] = useState("")
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        const getUsers = async() => {
+        const searchUsers = async() => {
             try {
-                let {data} = await axios.get(`http://127.0.0.1:8000/api/search-users/${searchInput}`, {
+                const {data} = await axios.get(`/search-users/${searchInput}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(data.users)
                 if (searchInput == "") {
                     setSearchedUsers([])
                     return
                 }
-                setSearchedUsers(data.users.filter(item => item.id !== user.id))
+
+                const filteredUsers = data.users.filter(item => item.id !== user.id)
+                setSearchedUsers(filteredUsers)
             } catch (error) {
                 console.log(error)
             }
         }
         if (searchInput !== "") {
-            getUsers()
+            searchUsers()
         }
     }, [searchInput, following])
 
     const handleToggleFollow = async(e, user) => {
-        e.target.innerText === "Follow"
-            ? e.target.innerText = "Unfollow"
-            : e.target.innerText = "Follow"
-
         try {
-
-            if (following.some((item) => item.id === user.id)) {
-                setFollowing((prev) => prev.filter((item) => item.id !== user.id));
-            } else {
-                setFollowing((prev) => [...new Set([user, ...prev])]);
-            }
-
+            const isFollowing = following.some(item => item.id === user.id);
+            e.target.innerText = isFollowing ? "Follow" : "Unfollow";
+            setFollowing(prev => isFollowing ? prev.filter(item => item.id !== user.id) : [...new Set([user, ...prev])])
+            
             const token = localStorage.getItem("token")
-            await axios.get(`http://127.0.0.1:8000/api/toggle-follow/${user.id}`, {
+            await axios.get(`/toggle-follow/${user.id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
-
-
         } catch (error) {
             console.log(error)
         }
